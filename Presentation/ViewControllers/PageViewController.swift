@@ -55,13 +55,13 @@ class PageViewController: UIPageViewController {
 // MARK: - Ext. UIPageViewControllerDataSource
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let currentPageIndex = (viewController as! ContentViewController).currentIndex else { return nil }
+        guard let currentPageIndex = (viewController as? ContentViewController)?.currentIndex else { return nil }
         let pageNumber = currentPageIndex - 1
         return showViewControllerAtIndex(pageNumber)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let currentPageIndex = (viewController as! ContentViewController).currentIndex else { return nil }
+        guard let currentPageIndex = (viewController as? ContentViewController)?.currentIndex else { return nil }
         let pageNumber = currentPageIndex + 1
         return showViewControllerAtIndex(pageNumber)
     }
@@ -82,7 +82,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 // MARK: - Ext. UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        guard let pendingIndex = (pendingViewControllers.first as! ContentViewController).currentIndex else { return }
+        guard let pendingIndex = (pendingViewControllers.first as? ContentViewController)?.currentIndex else { return }
         if pendingIndex == contents.count - 1 {
             StorageManager.shared.saveKey()
             dismiss(animated: true)
