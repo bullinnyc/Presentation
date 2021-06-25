@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     
     // MARK: - Private properties
-    private var presentationWasViewed: Bool {
+    private var isPresentationWasViewed: Bool {
         StorageManager.shared.fetchKey() ? true : false
     }
     
@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Private Methods
     private func startPresentation() {
-        if !presentationWasViewed {
+        if !isPresentationWasViewed {
             guard let pageVC = storyboard?.instantiateViewController(
                 withIdentifier: "PageViewController"
             ) as? PageViewController else { return }
@@ -38,6 +38,6 @@ class MainViewController: UIViewController {
     
     private func setupUI() {
         containerView.backgroundColor = .systemGray6
-        containerView.isHidden = !presentationWasViewed
+        containerView.isHidden = !isPresentationWasViewed
     }
 }
